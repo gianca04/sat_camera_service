@@ -48,3 +48,39 @@ python main.py --snapshot --output captura.jpg
 ```bash
 python main.py --serve --port 8005
 ```
+
+---
+
+## ⚙️ Registro como Servicio del Sistema (`systemd` Daemon)
+
+Para despliegues de producción 24/7 en Linux (`autoencoder`), crea el servicio `/etc/systemd/system/sat_camera_service.service`:
+
+```ini
+[Unit]
+Description=SAT Camera Frame Capture Service
+After=network.target
+
+[Service]
+Type=simple
+User=autoencoder
+WorkingDirectory=/home/autoencoder/sat_camera_service
+ExecStart=/home/autoencoder/sat_camera_service/venv/bin/python main.py --serve --port 8005
+Restart=always
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sat_camera_service
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Comandos de Gestión:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable sat_camera_service.service
+sudo systemctl start sat_camera_service.service
+sudo systemctl status sat_camera_service.service
+sudo journalctl -u sat_camera_service.service -f
+```
+
