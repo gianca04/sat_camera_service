@@ -1,0 +1,39 @@
+# Entorno y Configuración Sensible
+.env
+.env.local
+.env.*.local
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Entornos Virtuales
+venv/
+env/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# Archivos temporales y capturas de imagen
+*.jpg
+*.jpeg
+*.png
+captura_*.jpg
+snapshot.jpg
+captura_prueba.jpg
+
+# Logs
+*.log
+logs/
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
